@@ -17,119 +17,117 @@ class _PincodeState extends State<Pincode> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: klinearGradientStart,
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
 
-            Text(
-              'Enter Your Pin',
-              style: kBlackBold.copyWith(fontSize: 24, color: Colors.white),
+          Text(
+            'Enter Your Pin',
+            style: kBlackBold.copyWith(fontSize: 24, color: Colors.white),
+          ),
+
+          SizedBox(height: 20),
+
+          // Pin boxes
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              pinBox(0),
+              pinBox(1),
+              pinBox(2),
+              pinBox(3),
+            ],
+          ),
+
+          // Visibility button
+          IconButton(
+            onPressed: () {
+              setState(() {
+                isPinVisible = !isPinVisible;
+              });
+            },
+            icon: Icon(
+              isPinVisible ? Icons.visibility_off : Icons.visibility,
+              color: Colors.white,
             ),
+          ),
 
-            SizedBox(height: 20),
+          SizedBox(height: 20),
 
-            // Pin boxes
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                pinBox(0),
-                pinBox(1),
-                pinBox(2),
-                pinBox(3),
-              ],
-            ),
+          // Row 1
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              numButton('1'),
+              numButton('2'),
+              numButton('3'),
+            ],
+          ),
 
-            // Visibility button
-            IconButton(
-              onPressed: () {
-                setState(() {
-                  isPinVisible = !isPinVisible;
-                });
-              },
-              icon: Icon(
-                isPinVisible ? Icons.visibility_off : Icons.visibility,
-                color: Colors.white,
+          // Row 2
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              numButton('4'),
+              numButton('5'),
+              numButton('6'),
+            ],
+          ),
+
+          // Row 3
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              numButton('7'),
+              numButton('8'),
+              numButton('9'),
+            ],
+          ),
+
+          // Row 4
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+              // Check button
+              SizedBox(
+                width: 80,
+                height: 80,
+                child: IconButton(
+                  onPressed: () {
+                    if (enteredPin == '1234') {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                    }
+                  },
+                  icon: Icon(Icons.check_circle_sharp, color: Colors.white, size: 28),
+                ),
               ),
-            ),
 
-            SizedBox(height: 20),
+              numButton('0'),
 
-            // Row 1
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                numButton('1'),
-                numButton('2'),
-                numButton('3'),
-              ],
-            ),
-
-            // Row 2
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                numButton('4'),
-                numButton('5'),
-                numButton('6'),
-              ],
-            ),
-
-            // Row 3
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                numButton('7'),
-                numButton('8'),
-                numButton('9'),
-              ],
-            ),
-
-            // Row 4
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-                // Check button
-                SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: IconButton(
-                    onPressed: () {
-                      if (enteredPin == '1234') {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
-                        );
+              // Backspace button
+              SizedBox(
+                width: 80,
+                height: 80,
+                child: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (enteredPin.isNotEmpty) {
+                        enteredPin = enteredPin.substring(0, enteredPin.length - 1);
                       }
-                    },
-                    icon: Icon(Icons.check_circle_sharp, color: Colors.white, size: 28),
-                  ),
+                    });
+                  },
+                  icon: Icon(Icons.backspace_sharp, color: Colors.white),
                 ),
+              ),
 
-                numButton('0'),
+            ],
+          ),
 
-                // Backspace button
-                SizedBox(
-                  width: 80,
-                  height: 80,
-                  child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        if (enteredPin.isNotEmpty) {
-                          enteredPin = enteredPin.substring(0, enteredPin.length - 1);
-                        }
-                      });
-                    },
-                    icon: Icon(Icons.backspace_sharp, color: Colors.white),
-                  ),
-                ),
-
-              ],
-            ),
-
-          ],
-        ),
+        ],
       ),
     );
   }
