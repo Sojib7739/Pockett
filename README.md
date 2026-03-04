@@ -1,4 +1,4 @@
-# splash_screen2
+# pocket
 
 A new Flutter project.
 
