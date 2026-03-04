@@ -1,20 +1,21 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
-class MobileRecharge extends StatefulWidget {
-  const MobileRecharge({super.key});
+class AddMoneyCard extends StatefulWidget {
+  const AddMoneyCard({super.key});
 
   @override
-  State<MobileRecharge> createState() => _MobileRechargeState();
+  State<AddMoneyCard> createState() => _AddMoneyCardState();
 }
 
-class _MobileRechargeState extends State<MobileRecharge> {
+class _AddMoneyCardState extends State<AddMoneyCard> {
+  TextEditingController cardNum =  TextEditingController();
+  TextEditingController validity=  TextEditingController();
+  TextEditingController cardHolder =  TextEditingController();
+  TextEditingController  cvv =  TextEditingController();
+  TextEditingController  otp =  TextEditingController();
   TextEditingController  amount =  TextEditingController();
   TextEditingController  pin =  TextEditingController();
-  TextEditingController num= TextEditingController();
-  TextEditingController operator= TextEditingController();
 
 
   @override
@@ -23,16 +24,17 @@ class _MobileRechargeState extends State<MobileRecharge> {
         backgroundColor: kBackgroundColor,
         appBar: AppBar(
           backgroundColor: klinearGradientStart,
-          title: Text("Mobile Recharge"),
+          title: Text("Add Money From Card"),
         ),
         body: SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  controller: operator,
-                  keyboardType: TextInputType.name,
+                  controller: cardNum,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                      labelText: 'Sim Operator Name',
+                      labelText: 'Card Number',
                       labelStyle: kDarkPurpleBold
                   ),
                 ),
@@ -40,10 +42,34 @@ class _MobileRechargeState extends State<MobileRecharge> {
                   height: 25,
                 ),
                 TextField(
-                  controller: num,
+                  controller: validity,
+                  keyboardType: TextInputType.datetime,
+                  decoration: InputDecoration(
+                      hintText: 'MMYY',
+                      hintStyle: kDarkPurpleNormal,
+                      labelText: 'Validity',
+                      labelStyle: kDarkPurpleBold
+                  ),
+                ),
+                Container(
+                  height: 25,
+                ),
+                TextField(
+                  controller: cardHolder,
+                  keyboardType: TextInputType.name,
+                  decoration: InputDecoration(
+                      labelText: 'Card Owners Name',
+                      labelStyle: kDarkPurpleBold
+                  ),
+                ),
+                Container(
+                  height: 25,
+                ),
+                TextField(
+                  controller: cvv,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                      labelText: 'Account Number',
+                      labelText: 'CVV/CVC/CVN',
                       labelStyle: kDarkPurpleBold
                   ),
                 ),
@@ -70,7 +96,26 @@ class _MobileRechargeState extends State<MobileRecharge> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.sizeOf(context).height/2,
+                  height: 25,
+                ),
+                Container(
+                    height: 50,
+                    width:  MediaQuery.sizeOf(context).width/4+50,
+                    child: GestureDetector(
+                      onTap: (){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("OTP sent successfully "))
+                        );
+                      },
+                      child: Text(
+                        "Send OTP",
+                        style: kDarkPurpleBold.copyWith(fontSize: 30),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                ),
+                Container(
+                  height: 200,
                 ),
                 Container(
                     height: 50,
@@ -79,7 +124,7 @@ class _MobileRechargeState extends State<MobileRecharge> {
                     child: GestureDetector(
                       onTap: (){
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Mobile Recharge successfull "))
+                            SnackBar(content: Text("Money added successfully "))
                         );
                       },
                       child: Text(
@@ -95,4 +140,3 @@ class _MobileRechargeState extends State<MobileRecharge> {
     );
   }
 }
-

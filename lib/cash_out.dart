@@ -10,16 +10,93 @@ class CashOut extends StatefulWidget {
 
 class _CashOutState extends State<CashOut> {
   @override
+  TextEditingController  amount =  TextEditingController();
+  TextEditingController  pin =  TextEditingController();
+  TextEditingController num= TextEditingController();
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: klinearGradientStart,
-        title: Text("Cash Out"),
-      ),
-      body: Center(
-        child: Text("Cash Out Page"),
-      ),
+        backgroundColor: kBackgroundColor,
+        appBar: AppBar(
+          backgroundColor: klinearGradientStart,
+          title: Text("Cash Out"),
+        ),
+        body: SingleChildScrollView(
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TextField(
+                  controller: num,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      labelText: 'Account Number',
+                      labelStyle: kDarkPurpleBold
+                  ),
+                ),
+                Container(
+                  height: 25,
+                  width: MediaQuery.sizeOf(context).width,
+                ),
+                TextField(
+                  controller: amount,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      labelText: 'Enter Amount',
+                      labelStyle: kDarkPurpleBold
+                  ),
+                ),
+                Container(
+                  height: 25,
+                ),
+                TextField(
+                  controller: pin,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      labelText: 'Enter pin',
+                      labelStyle: kDarkPurpleBold
+                  ),
+                ),
+                Container(
+                  height: 25,
+                ),
+                Container(
+                  height: 30,
+                  width: MediaQuery.sizeOf(context).width/2,
+                  color: klinearGradientStart,
+                  child: Text(
+                    "Charge= 00",
+                    style: kWhiteBold.copyWith(fontSize: 15),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Container(
+                  height: MediaQuery.sizeOf(context).height/2,
+                ),
+                Container(
+                    height: 50,
+                    width:  MediaQuery.sizeOf(context).width-60,
+                    color: klinearGradientEnd,
+                    child: GestureDetector(
+                      onTap: (){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Cashout Successful "))
+                        );
+                      },
+                      child: Text(
+                        "Submit",
+                        style: kWhiteBold.copyWith(fontSize: 30),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                ),
+              ],
+            )
+        )
     );
   }
 }
+
+
+
