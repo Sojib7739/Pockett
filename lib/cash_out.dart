@@ -76,7 +76,7 @@ class _CashOutState extends State<CashOut> {
                 ),
                 Container(
                     height: 50,
-                    width:  200,
+                    width:  201,
                     color: klinearGradientStart,
                     child: GestureDetector(
                       onTap: (){
