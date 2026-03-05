@@ -81,7 +81,7 @@ class _SendMoneyState extends State<SendMoney> {
                   ),
                   child: Text(
                     "Submit",
-                    style: kWhiteBold.copyWith(fontSize: 24),
+                    style: kWhiteBold.copyWith(fontSize: 28),
                     textAlign: TextAlign.center,
                   ),
                 ),
