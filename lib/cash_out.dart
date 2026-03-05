@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
-
 class CashOut extends StatefulWidget {
   const CashOut({super.key});
 

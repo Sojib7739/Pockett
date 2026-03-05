@@ -18,7 +18,7 @@ class Reminder extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Container(
               height: 50,
               decoration: BoxDecoration(
