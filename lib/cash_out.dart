@@ -63,7 +63,7 @@ class _CashOutState extends State<CashOut> {
                 ),
                 Container(
                   height: 30,
-                  width: MediaQuery.sizeOf(context).width/2,
+                  width: 200,
                   color: klinearGradientStart,
                   child: Text(
                     "Charge= 00",
