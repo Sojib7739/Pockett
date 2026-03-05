@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-import 'package:splash_screen2/add_money_account.dart';
 import 'package:splash_screen2/add_money_card.dart';
 import 'constants.dart';
 

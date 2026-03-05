@@ -113,7 +113,7 @@ class Reminder extends StatelessWidget {
                   height: 50,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: klinearGradientEnd,
+                    color: klinearGradientStart,
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(8),
                   ),

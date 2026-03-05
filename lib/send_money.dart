@@ -76,7 +76,7 @@ class _SendMoneyState extends State<SendMoney> {
                   width: 200,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: kBackgroundColor,
+                    color: klinearGradientStart,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(

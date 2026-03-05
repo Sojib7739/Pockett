@@ -82,7 +82,7 @@ class _AddMoneyFormState extends State<AddMoneyFormBank> {
               Container(
                   height: 50,
                   width:  200,
-                  color: kBackgroundColor,
+                  color: klinearGradientStart,
                   child: GestureDetector(
                     onTap: (){
                       ScaffoldMessenger.of(context).showSnackBar(
