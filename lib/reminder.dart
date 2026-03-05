@@ -105,7 +105,7 @@ class Reminder extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Reminder Saved")),
+                    SnackBar(content: Text("Reminder Saved")),
                   );
                 },
                 child: Container(
