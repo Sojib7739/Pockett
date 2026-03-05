@@ -81,7 +81,7 @@ class _CashOutState extends State<CashOut> {
                     child: GestureDetector(
                       onTap: (){
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Cashout Successful "))
+                            SnackBar(content: Text("Cashout Done "))
                         );
                       },
                       child: Text(

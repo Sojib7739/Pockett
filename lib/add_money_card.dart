@@ -91,7 +91,7 @@ class _AddMoneyCardState extends State<AddMoneyCard> {
                   controller: pin,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                      labelText: 'Enter pin',
+                      labelText: 'Pin',
                       labelStyle: kDarkPurpleBold
                   ),
                 ),
@@ -109,7 +109,7 @@ class _AddMoneyCardState extends State<AddMoneyCard> {
                       },
                       child: Text(
                         "Send OTP",
-                        style: kDarkPurpleBold.copyWith(fontSize: 30),
+                        style: kDarkPurpleBold.copyWith(fontSize: 28),
                         textAlign: TextAlign.center,
                       ),
                     )
@@ -129,7 +129,7 @@ class _AddMoneyCardState extends State<AddMoneyCard> {
                       },
                       child: Text(
                         "Submit",
-                        style: kWhiteBold.copyWith(fontSize: 30),
+                        style: kWhiteBold.copyWith(fontSize: 28),
                         textAlign: TextAlign.center,
                       ),
                     )

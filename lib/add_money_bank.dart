@@ -71,7 +71,7 @@ class _AddMoneyFormState extends State<AddMoneyFormBank> {
                     },
                     child: Text(
                       "Send OTP",
-                      style: kDarkPurpleBold.copyWith(fontSize: 30),
+                      style: kDarkPurpleBold.copyWith(fontSize: 28),
                       textAlign: TextAlign.center,
                     ),
                   )
@@ -91,7 +91,7 @@ class _AddMoneyFormState extends State<AddMoneyFormBank> {
                     },
                     child: Text(
                       "Submit",
-                      style: kWhiteBold.copyWith(fontSize: 30),
+                      style: kWhiteBold.copyWith(fontSize: 28),
                       textAlign: TextAlign.center,
                     ),
                   )

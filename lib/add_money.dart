@@ -49,7 +49,7 @@ class _AddMoneyState extends State<AddMoney> {
                 ),
                 child: Text(
                   "From Bank Account",
-                  style: kDarkPurpleBold.copyWith(fontSize: 24),
+                  style: kDarkPurpleBold.copyWith(fontSize: 25),
                 ),
               ),
             ),
@@ -79,7 +79,7 @@ class _AddMoneyState extends State<AddMoney> {
                 ),
                 child: Text(
                   "From Card",
-                  style: kDarkPurpleBold.copyWith(fontSize: 24),
+                  style: kDarkPurpleBold.copyWith(fontSize: 25),
                 ),
               ),
             ),

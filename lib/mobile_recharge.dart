@@ -84,7 +84,7 @@ class _MobileRechargeState extends State<MobileRecharge> {
                       },
                       child: Text(
                         "Submit",
-                        style: kWhiteBold.copyWith(fontSize: 30),
+                        style: kWhiteBold.copyWith(fontSize: 28),
                         textAlign: TextAlign.center,
                       ),
                     )
