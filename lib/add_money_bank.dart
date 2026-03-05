@@ -81,8 +81,8 @@ class _AddMoneyFormState extends State<AddMoneyFormBank> {
               ),
               Container(
                   height: 50,
-                  width:  MediaQuery.sizeOf(context).width-60,
-                  color: klinearGradientEnd,
+                  width:  200,
+                  color: kBackgroundColor,
                   child: GestureDetector(
                     onTap: (){
                       ScaffoldMessenger.of(context).showSnackBar(
