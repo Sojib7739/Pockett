@@ -96,6 +96,17 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
+              title: Text('Notifications', style: kDarkPurpleBold),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NotificationScreen(),
+                  ),
+                );
+              },
+            ),
+
+            ListTile(
               title: Text('Reminder', style: kDarkPurpleBold),
               onTap: () {
                 Navigator.push(
