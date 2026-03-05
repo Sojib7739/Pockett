@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_screen2/add_money_card.dart';
+import 'add_money_bank.dart';
 import 'constants.dart';
 
 class AddMoney extends StatefulWidget {
@@ -33,8 +34,8 @@ class _AddMoneyState extends State<AddMoney> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    //builder: (context) => const AddMoneyFormBank(),
-                    builder: (context) => const AddMoney(),
+                    builder: (context) => const AddMoneyFormBank(),
+                    //builder: (context) => const AddMoney(),
                   ),
                 );
               },
@@ -63,8 +64,8 @@ class _AddMoneyState extends State<AddMoney> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    //builder: (context) => const AddMoneyCard(),
-                    builder: (context) => const AddMoney(),
+                    builder: (context) => const AddMoneyCard(),
+                    //builder: (context) => const AddMoney(),
                   ),
                 );
               },
