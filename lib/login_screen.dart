@@ -4,6 +4,7 @@ import 'package:splash_screen2/pincode.dart';
 import 'package:splash_screen2/sign_up.dart';
 import 'constants.dart';
 import 'forgot_password.dart';
+import 'globals.dart' as globals;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -101,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         ElevatedButton(
           onPressed: () {
-            if (((_phoneNumber == "01912345678" || _phoneNumber == "01712345678") && _password == "12345") || (_phoneNumber == "" && _password == "" )) {
+            if ((_phoneNumber == globals.userNumber && _password == globals.userPassword) || (_phoneNumber == "" && _password == "")) {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (_) => Pin()),

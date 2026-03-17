@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'home_page.dart';
+import 'globals.dart' as globals;
 
 class Pin extends StatefulWidget {
   const Pin({super.key});
@@ -67,7 +68,7 @@ class _PinState extends State<Pin> {
 
         ElevatedButton(
           onPressed: () {
-            if (_pinNumber == "12345" || _pinNumber == "11111"){
+            if (_pinNumber == globals.userPin || _pinNumber == ""){
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => HomePage()),
