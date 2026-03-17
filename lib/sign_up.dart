@@ -21,17 +21,17 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kBackgroundColor,
-        body: Container(
-          margin: const EdgeInsets.all(24),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _header(context),
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
               _inputField(context),
             ],
           ),
-        ),
+        )
     );
   }
   Widget _header(BuildContext context){

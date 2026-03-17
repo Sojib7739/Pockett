@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-
 import 'constants.dart';
+import 'home_page.dart';
 
-class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({super.key});
+class Pin extends StatefulWidget {
+  const Pin({super.key});
 
   @override
-  State<ForgotPassword> createState() => _ForgotPasswordState();
+  State<Pin> createState() => _PinState();
 }
 
-class _ForgotPasswordState extends State<ForgotPassword> {
-  String _registeredPhoneNumber= "";
-
+class _PinState extends State<Pin> {
+  String _pinNumber = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
+
       body: Container(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -31,16 +31,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
     );
   }
-
   Widget _header(BuildContext context){
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-            "Forgot Password?",
-            style: kWhiteBold.copyWith(fontSize: 40)
-        ),
-      ],
+    return Center(
+      child: Text(
+        "ENTER PIN NUMBER",
+        textAlign: TextAlign.center,
+        style: kWhiteBold.copyWith(fontSize: 28),
+      ),
     );
   }
   Widget _inputField(BuildContext context){
@@ -50,7 +47,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       children: [
         TextField(
           decoration: InputDecoration(
-            hintText: "Enter Registered Phone Number",
+            hintText: "Enter Your Pin Number",
             hintStyle: kWhiteBold,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
@@ -62,7 +59,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           ),
           keyboardType: TextInputType.phone,
           onChanged: (value) {
-            _registeredPhoneNumber = value;
+            _pinNumber = value;
 
           },
         ),
@@ -70,13 +67,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
         ElevatedButton(
           onPressed: () {
-            if (_registeredPhoneNumber == "01912345678" || _registeredPhoneNumber == "01712345678"){
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("New password sent to your registered phone number")),
+            if (_pinNumber == "12345" || _pinNumber == "11111"){
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
               );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Please enter a valid phone number")),
+                const SnackBar(content: Text("Wrong Pin Number")),
               );
             }
           },
@@ -94,3 +92,4 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 }
+

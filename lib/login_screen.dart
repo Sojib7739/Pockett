@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splash_screen2/pin.dart';
 import 'package:splash_screen2/pincode.dart';
 import 'package:splash_screen2/sign_up.dart';
 import 'constants.dart';
@@ -20,16 +21,18 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         backgroundColor: kBackgroundColor,
         body: Container(
-          margin: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _header(context),
-              const SizedBox(height: 40),
-              _inputField(context),
-              _forgetPassword(context),
-              _signup(context),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _header(context),
+                const SizedBox(height: 40),
+                _inputField(context),
+                _forgetPassword(context),
+                _signup(context),
+              ],
+            ),
           ),
         ),
     );
@@ -101,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
             if ((_phoneNumber == "01912345678" || _phoneNumber == "01712345678") && _password == "12345") {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (_) => Pincode()),
+                MaterialPageRoute(builder: (_) => Pin()),
               );
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -143,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Dont have an account?", style: kWhiteBold),
+        Text("Don't have an account?", style: kWhiteBold),
         TextButton(onPressed: () {
           Navigator.push(
             context,
