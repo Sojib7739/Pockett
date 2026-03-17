@@ -10,6 +10,7 @@ import 'cash_out.dart';
 import 'constants.dart';
 import 'mobile_recharge.dart';
 import 'notification.dart';
+import 'globals.dart' as globals;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, this.title = "Home"});
@@ -171,9 +172,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            Text("User Name", style: kWhiteNormal.copyWith(color: Colors.white, fontSize: 32)),
+            Text(globals.userName, style: kWhiteNormal.copyWith(color: Colors.white, fontSize: 32)),
             Text("Available Balance", style: kWhiteNormal.copyWith(color: Colors.white, fontSize: 14)),
-            Text("৳ 12500.50", style: kWhiteBold.copyWith(color: Colors.white, fontSize: 18)),
+            Text("৳ ${globals.balance}", style: kWhiteBold.copyWith(color: Colors.white, fontSize: 18)),
+
           ],
         ),
       ),

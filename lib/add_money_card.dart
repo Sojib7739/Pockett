@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'OTP.dart';
 import 'constants.dart';
+import 'globals.dart' as globals;
+
 
 class AddMoneyCard extends StatefulWidget {
   const AddMoneyCard({super.key});
@@ -9,135 +12,154 @@ class AddMoneyCard extends StatefulWidget {
 }
 
 class _AddMoneyCardState extends State<AddMoneyCard> {
-  TextEditingController cardNum =  TextEditingController();
-  TextEditingController validity=  TextEditingController();
-  TextEditingController cardHolder =  TextEditingController();
-  TextEditingController  cvv =  TextEditingController();
-  TextEditingController  otp =  TextEditingController();
-  TextEditingController  amount =  TextEditingController();
-  TextEditingController  pin =  TextEditingController();
-
+  String _cardNum = "";
+  //String _validity = "";
+  String _cvv = "";
+  String _amount = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kBackgroundColor,
-        appBar: AppBar(
-          backgroundColor: klinearGradientStart,
-          title: Text("Add Money From Card"),
+      backgroundColor: kBackgroundColor,
+      appBar: AppBar(
+        backgroundColor: klinearGradientStart,
+        title: const Text("Add Money From Card"),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              "Card to Pocket",
+              style: kWhiteBold.copyWith(fontSize: 28),
+              textAlign: TextAlign.center,
+            ),
+
+            const SizedBox(height: 30),
+
+            TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: 'Card Number',
+                hintStyle: kWhiteBold,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide.none,
+                ),
+                fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                filled: true,
+                prefixIcon: const Icon(Icons.credit_card),
+              ),
+              onChanged: (value) {
+                _cardNum = value;
+              },
+            ),
+
+            const SizedBox(height: 15),
+            /*
+            TextField(
+              keyboardType: TextInputType.datetime,
+              decoration: InputDecoration(
+                hintText: 'MM/YY',
+                hintStyle: kWhiteBold,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide.none,
+                ),
+                fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                filled: true,
+                prefixIcon: const Icon(Icons.date_range),
+              ),
+              onChanged: (value) {
+                _validity = value;
+              },
+            ),
+
+            const SizedBox(height: 15),
+            */
+            TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: 'CVV',
+                hintStyle: kWhiteBold,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide.none,
+                ),
+                fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                filled: true,
+                prefixIcon: const Icon(Icons.lock),
+              ),
+              onChanged: (value) {
+                _cvv = value;
+              },
+            ),
+
+            const SizedBox(height: 15),
+
+            TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: 'Enter Amount',
+                hintStyle: kWhiteBold,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide.none,
+                ),
+                fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                filled: true,
+                prefixIcon: const Icon(Icons.money),
+              ),
+              onChanged: (value) {
+                _amount = value;
+              },
+            ),
+
+            const SizedBox(height: 25),
+
+            ElevatedButton(
+              onPressed: () {
+                if (_cardNum == "1234567890123456" || _cardNum == "1111222233334444") {
+                  if (_cvv == "123" || _cvv == "111") {
+                    if (_amount.isNotEmpty && int.tryParse(_amount) != null && int.parse(_amount) > 0) {
+                      globals.balance += double.parse(_amount);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("OTP sent successfully")),
+                      );
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const OTP()),
+                      );
+
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Enter valid amount")),
+                      );
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Invalid CVV")),
+                    );
+                  }
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Invalid Card Number")),
+                  );
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: klinearGradientStart,
+                shape: const StadiumBorder(),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+              ),
+              child: Text("Send OTP", style: kWhiteBold),
+            ),
+          ],
         ),
-        body: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: cardNum,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      labelText: 'Card Number',
-                      labelStyle: kDarkPurpleBold
-                  ),
-                ),
-                Container(
-                  height: 25,
-                ),
-                TextField(
-                  controller: validity,
-                  keyboardType: TextInputType.datetime,
-                  decoration: InputDecoration(
-                      hintText: 'MMYY',
-                      hintStyle: kDarkPurpleNormal,
-                      labelText: 'Validity',
-                      labelStyle: kDarkPurpleBold
-                  ),
-                ),
-                Container(
-                  height: 25,
-                ),
-                TextField(
-                  controller: cardHolder,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                      labelText: 'Card Owners Name',
-                      labelStyle: kDarkPurpleBold
-                  ),
-                ),
-                Container(
-                  height: 25,
-                ),
-                TextField(
-                  controller: cvv,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      labelText: 'CVV/CVC/CVN',
-                      labelStyle: kDarkPurpleBold
-                  ),
-                ),
-                Container(
-                  height: 25,
-                ),
-                TextField(
-                  controller: amount,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      labelText: 'Enter Amount',
-                      labelStyle: kDarkPurpleBold
-                  ),
-                ),
-                Container(
-                  height: 25,
-                ),
-                TextField(
-                  controller: pin,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      labelText: 'Pin',
-                      labelStyle: kDarkPurpleBold
-                  ),
-                ),
-                Container(
-                  height: 25,
-                ),
-                Container(
-                    height: 50,
-                    width:  MediaQuery.sizeOf(context).width/4+50,
-                    child: GestureDetector(
-                      onTap: (){
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("OTP sent successfully "))
-                        );
-                      },
-                      child: Text(
-                        "Send OTP",
-                        style: kDarkPurpleBold.copyWith(fontSize: 28),
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                ),
-                Container(
-                  height: 200,
-                ),
-                Container(
-                    height: 50,
-                    width:  200,
-                    color: klinearGradientStart,
-                    child: GestureDetector(
-                      onTap: (){
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Money added successfully "))
-                        );
-                      },
-                      child: Text(
-                        "Submit",
-                        style: kWhiteBold.copyWith(fontSize: 28),
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                ),
-              ],
-            )
-        )
+      ),
     );
   }
 }
-

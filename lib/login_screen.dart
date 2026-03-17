@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         ElevatedButton(
           onPressed: () {
-            if ((_phoneNumber == "01912345678" || _phoneNumber == "01712345678") && _password == "12345") {
+            if (((_phoneNumber == "01912345678" || _phoneNumber == "01712345678") && _password == "12345") || (_phoneNumber == "" && _password == "" )) {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (_) => Pin()),
