@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
-
 class CashOut extends StatefulWidget {
   const CashOut({super.key});
 
@@ -63,7 +62,7 @@ class _CashOutState extends State<CashOut> {
                 ),
                 Container(
                   height: 30,
-                  width: MediaQuery.sizeOf(context).width/2,
+                  width: 200,
                   color: klinearGradientStart,
                   child: Text(
                     "Charge= 00",
@@ -76,12 +75,12 @@ class _CashOutState extends State<CashOut> {
                 ),
                 Container(
                     height: 50,
-                    width:  MediaQuery.sizeOf(context).width-60,
-                    color: klinearGradientEnd,
+                    width:  201,
+                    color: klinearGradientStart,
                     child: GestureDetector(
                       onTap: (){
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Cashout Successful "))
+                            SnackBar(content: Text("Cashout Done "))
                         );
                       },
                       child: Text(
@@ -97,6 +96,7 @@ class _CashOutState extends State<CashOut> {
     );
   }
 }
+
 
 
 

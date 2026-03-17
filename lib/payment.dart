@@ -62,8 +62,8 @@ class _PaymentState extends State<Payment> {
                 ),
                 Container(
                     height: 50,
-                    width:  MediaQuery.sizeOf(context).width-60,
-                    color: klinearGradientEnd,
+                    width:  200,
+                    color: klinearGradientStart,
                     child: GestureDetector(
                       onTap: (){
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -72,7 +72,7 @@ class _PaymentState extends State<Payment> {
                       },
                       child: Text(
                         "Submit",
-                        style: kWhiteBold.copyWith(fontSize: 30),
+                        style: kWhiteBold.copyWith(fontSize: 28),
                         textAlign: TextAlign.center,
                       ),
                     )
@@ -83,5 +83,4 @@ class _PaymentState extends State<Payment> {
     );
   }
 }
-
 

@@ -75,7 +75,7 @@ class _MobileRechargeState extends State<MobileRecharge> {
                 Container(
                     height: 50,
                     width:  MediaQuery.sizeOf(context).width-60,
-                    color: klinearGradientEnd,
+                    color: klinearGradientStart,
                     child: GestureDetector(
                       onTap: (){
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -84,7 +84,7 @@ class _MobileRechargeState extends State<MobileRecharge> {
                       },
                       child: Text(
                         "Submit",
-                        style: kWhiteBold.copyWith(fontSize: 30),
+                        style: kWhiteBold.copyWith(fontSize: 28),
                         textAlign: TextAlign.center,
                       ),
                     )

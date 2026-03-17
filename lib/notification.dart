@@ -108,6 +108,39 @@ class _NotificationScreenState extends State<NotificationScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
+                height: 80,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text("  Due Bill: Electricity on 10/01/2026 : 1900/-",
+                  style: TextStyle(fontSize: 24),
+                ),
+
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                height: 80,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text("  Due Bill: EMI on 17/01/2026 : 500/-",
+                  style: TextStyle(fontSize: 24),
+                ),
+
+              ),
+            ),
+
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
                 height: 90,
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -119,6 +152,39 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 ),
               ),
             ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                height: 80,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text("  Due Bill: Electricity on 10/01/2026 : 1900/-",
+                  style: TextStyle(fontSize: 24),
+                ),
+
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                height: 80,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text("  Due Bill: EMI on 17/01/2026 : 500/-",
+                  style: TextStyle(fontSize: 24),
+                ),
+
+              ),
+            ),
+
           ],
         ),
       ),
