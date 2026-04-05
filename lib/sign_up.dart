@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:splash_screen2/auth_service.dart';
 import 'package:splash_screen2/login_screen.dart';
-
 import 'constants.dart';
 
 class SignUp extends StatefulWidget {
@@ -11,167 +11,170 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  String _name = "";
   String _phoneNumber = "";
+  String _email = "";
   String _password = "";
   String _pin = "";
-  String _name="";
-  String _email="";
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kBackgroundColor,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _header(context),
-              const SizedBox(height: 30),
-              _inputField(context),
-            ],
-          ),
-        )
+      backgroundColor: kBackgroundColor,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _header(context),
+            const SizedBox(height: 30),
+            _inputField(context),
+          ],
+        ),
+      ),
     );
   }
-  Widget _header(BuildContext context){
+
+  Widget _header(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-            "Sign Up",
-          style: kWhiteBold.copyWith(fontSize: 40)
-        ),
+        Text("Sign Up", style: kWhiteBold.copyWith(fontSize: 40)),
         const SizedBox(height: 40),
       ],
     );
   }
 
-  Widget _inputField(BuildContext context){
+  Widget _inputField(BuildContext context) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter Your Name",
-              hintStyle: kWhiteBold,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none,
-              ),
-              fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-              filled: true,
-              prefixIcon: const Icon(Icons.face),
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        TextField(
+          decoration: InputDecoration(
+            hintText: "Enter Your Name",
+            hintStyle: kWhiteBold,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide.none,
             ),
-            keyboardType: TextInputType.text,
-            onChanged: (value) {
-                _name = value;
-            },
+            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+            filled: true,
+            prefixIcon: const Icon(Icons.face),
           ),
-          SizedBox(height: 10),
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter Your Phone Number",
-              hintStyle: kWhiteBold,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none,
-              ),
-              fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-              filled: true,
-              prefixIcon: const Icon(Icons.phone),
+          keyboardType: TextInputType.text,
+          onChanged: (value) => _name = value,
+        ),
+        const SizedBox(height: 10),
+        TextField(
+          decoration: InputDecoration(
+            hintText: "Enter Your Phone Number",
+            hintStyle: kWhiteBold,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide.none,
             ),
-            keyboardType: TextInputType.phone,
-            onChanged: (value) {
-                _phoneNumber = value;
-            },
+            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+            filled: true,
+            prefixIcon: const Icon(Icons.phone),
           ),
-          SizedBox(height: 10),
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Enter Your Email Address",
-              hintStyle: kWhiteBold,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none,
-              ),
-              fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-              filled: true,
-              prefixIcon: const Icon(Icons.email_sharp),
+          keyboardType: TextInputType.phone,
+          onChanged: (value) => _phoneNumber = value,
+        ),
+        const SizedBox(height: 10),
+        TextField(
+          decoration: InputDecoration(
+            hintText: "Enter Your Email Address",
+            hintStyle: kWhiteBold,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide.none,
             ),
-            keyboardType: TextInputType.emailAddress,
-            onChanged: (value) {
-                _email = value;
-            },
+            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+            filled: true,
+            prefixIcon: const Icon(Icons.email_sharp),
           ),
-          SizedBox(height: 10),
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Password",
-              hintStyle: kWhiteBold,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none,
-              ),
-              fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-              filled: true,
-              prefixIcon: const Icon(Icons.lock),
+          keyboardType: TextInputType.emailAddress,
+          onChanged: (value) => _email = value,
+        ),
+        const SizedBox(height: 10),
+        TextField(
+          decoration: InputDecoration(
+            hintText: "Password",
+            hintStyle: kWhiteBold,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide.none,
             ),
-            obscureText: true,
-            keyboardType: TextInputType.text,
-            onChanged: (value) {
-                _password = value;
-            },
+            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+            filled: true,
+            prefixIcon: const Icon(Icons.lock),
           ),
-          SizedBox(height: 10),
-          TextField(
-            decoration: InputDecoration(
-              hintText: "PIN",
-              hintStyle: kWhiteBold,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none,
-              ),
-              fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-              filled: true,
-              prefixIcon: const Icon(Icons.lock),
+          obscureText: true,
+          onChanged: (value) => _password = value,
+        ),
+        const SizedBox(height: 10),
+        TextField(
+          decoration: InputDecoration(
+            hintText: "PIN",
+            hintStyle: kWhiteBold,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide.none,
             ),
-            obscureText: true,
-            keyboardType: TextInputType.number,
-            onChanged: (value) {
-                _pin = value;
-            },
+            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+            filled: true,
+            prefixIcon: const Icon(Icons.lock),
           ),
-          SizedBox(height: 10),
-
-          ElevatedButton(
-            onPressed: () {
-              if(_phoneNumber == "01712345678" &&
-                  _password == "12345" &&
-                  _pin == "1234" &&
-                  _name == "Example" &&
-                  _email == "example@gmail.com"){
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => LoginScreen()),
-                );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Invalid Information or Unfilled Box")),
-                );
-              }
-            },
-            child: Text(
-              "Sign Up",
-              style: kWhiteBold,
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: klinearGradientStart,
-              shape: StadiumBorder(),
-              padding: EdgeInsets.symmetric(vertical: 16),
-            ),
+          obscureText: true,
+          keyboardType: TextInputType.number,
+          onChanged: (value) => _pin = value,
+        ),
+        const SizedBox(height: 10),
+        ElevatedButton(
+          onPressed: _isLoading
+              ? null
+              : () async {
+            if (_name.isEmpty ||
+                _email.isEmpty ||
+                _password.isEmpty ||
+                _phoneNumber.isEmpty ||
+                _pin.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                    content: Text("Please fill in all fields")),
+              );
+              return;
+            }
+            setState(() => _isLoading = true);
+            try {
+              await authService.value.createAccount(
+                email: _email,
+                password: _password,
+              );
+              await authService.value.updateUsername(username: _name);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => LoginScreen()),
+              );
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(e.toString())),
+              );
+            } finally {
+              setState(() => _isLoading = false);
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: klinearGradientStart,
+            shape: const StadiumBorder(),
+            padding: const EdgeInsets.symmetric(vertical: 16),
           ),
-        ],
-     );
+          child: _isLoading
+              ? const CircularProgressIndicator(color: Colors.white)
+              : Text("Sign Up", style: kWhiteBold),
+        ),
+      ],
+    );
   }
 }

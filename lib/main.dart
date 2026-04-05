@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:splash_screen2/login_screen.dart';
 import 'package:splash_screen2/pincode.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  print("✅ Firebase initialized successfully!");  // add this
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

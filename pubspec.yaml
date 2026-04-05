@@ -37,6 +37,9 @@ dependencies:
   flutter_native_splash: ^2.4.7
   google_fonts: ^6.0.0
   card_swiper: ^3.0.1
+  firebase_core: ^4.6.0
+  firebase_auth: ^6.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

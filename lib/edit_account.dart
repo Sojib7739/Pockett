@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:splash_screen2/auth_service.dart';
 import 'constants.dart';
-import 'globals.dart' as globals;
 
 class EditAccount extends StatefulWidget {
   const EditAccount({super.key});
@@ -10,9 +10,15 @@ class EditAccount extends StatefulWidget {
 }
 
 class _EditAccountState extends State<EditAccount> {
-  String _name = globals.userName;
-  String _pin = globals.userPin;
-  String _email = globals.userEmail;
+  late String _name;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Pre-fill with current Firebase display name
+    _name = authService.value.currentUser?.displayName ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +33,15 @@ class _EditAccountState extends State<EditAccount> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _inputField("Name", _name, (value) => _name = value, Icons.person),
-            const SizedBox(height: 16),
-            _inputField("PIN Code", _pin, (value) => _pin = value, Icons.lock),
-            const SizedBox(height: 16),
-            _inputField("Email", _email, (value) => _email = value, Icons.email),
+            _inputField(
+              "Name",
+              _name,
+                  (value) => _name = value,
+              Icons.person,
+            ),
             const SizedBox(height: 30),
             Text(
-              "Please note: Changes may require restarting the app to fully take effect.",
+              "Please note: Only your display name can be updated here.",
               style: TextStyle(
                 color: Colors.red,
                 fontSize: 10,
@@ -44,21 +51,36 @@ class _EditAccountState extends State<EditAccount> {
             ),
             const SizedBox(height: 30),
             ElevatedButton(
-              onPressed: () {
-                globals.userName = _name;
-                globals.userPin = _pin;
-                globals.userEmail = _email;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Account updated successfully")),
-                );
-                Navigator.pop(context);
+              onPressed: _isLoading
+                  ? null
+                  : () async {
+                setState(() => _isLoading = true);
+                try {
+                  await authService.value.updateUsername(
+                    username: _name,
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content:
+                        Text("Account updated successfully")),
+                  );
+                  Navigator.pop(context);
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(e.toString())),
+                  );
+                } finally {
+                  setState(() => _isLoading = false);
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: klinearGradientStart,
                 shape: const StadiumBorder(),
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              child: Text("CONFIRM", style: kWhiteBold),
+              child: _isLoading
+                  ? const CircularProgressIndicator(color: Colors.white)
+                  : Text("CONFIRM", style: kWhiteBold),
             ),
           ],
         ),
@@ -66,7 +88,13 @@ class _EditAccountState extends State<EditAccount> {
     );
   }
 
-  Widget _inputField(String label, String initialValue, Function(String) onChanged, IconData icon, {bool obscure = false}) {
+  Widget _inputField(
+      String label,
+      String initialValue,
+      Function(String) onChanged,
+      IconData icon, {
+        bool obscure = false,
+      }) {
     return TextField(
       decoration: InputDecoration(
         hintText: label,
