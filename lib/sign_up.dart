@@ -172,7 +172,7 @@ class _SignUpState extends State<SignUp> {
           ),
           child: _isLoading
               ? const CircularProgressIndicator(color: Colors.white)
-              : Text("Sign Up", style: kWhiteBold),
+              : Text("Sign Up.", style: kWhiteBold),
         ),
       ],
     );
