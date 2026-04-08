@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:splash_screen2/auth_service.dart';
 import 'package:splash_screen2/pin.dart';
 import 'package:splash_screen2/sign_up.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'constants.dart';
 import 'forgot_password.dart';
 
@@ -15,18 +15,16 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String _email = "";
   String _password = "";
-  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const SizedBox(height: 60),
             _header(context),
             const SizedBox(height: 40),
             _inputField(context),
@@ -44,8 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         Text("Welcome Back", style: kWhiteBold.copyWith(fontSize: 40)),
         const SizedBox(height: 8),
-        Text("Enter your credentials to login",
-            style: kWhiteBold.copyWith(fontSize: 20)),
+        Text("Enter your credentials to login", style: kWhiteBold.copyWith(fontSize: 20)),
       ],
     );
   }
@@ -58,10 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: InputDecoration(
             hintText: "Email",
             hintStyle: kWhiteBold,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide.none,
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
             fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
             filled: true,
             prefixIcon: const Icon(Icons.email),
@@ -74,10 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: InputDecoration(
             hintText: "Password",
             hintStyle: kWhiteBold,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide.none,
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
             fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
             filled: true,
             prefixIcon: const Icon(Icons.lock),
@@ -87,25 +78,17 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         const SizedBox(height: 10),
         ElevatedButton(
-          onPressed: _isLoading
-              ? null
-              : () async {
-            setState(() => _isLoading = true);
+          onPressed: () async {
             try {
-              await authService.value.singIn(
-                email: _email,
-                password: _password,
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
+                email: _email.trim(),
+                password: _password.trim(),
               );
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => Pin()),
-              );
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Pin()));
             } catch (e) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(e.toString())),
+                SnackBar(content: Text("Login failed: ${e.toString()}")),
               );
-            } finally {
-              setState(() => _isLoading = false);
             }
           },
           style: ElevatedButton.styleFrom(
@@ -113,9 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
-          child: _isLoading
-              ? const CircularProgressIndicator(color: Colors.white)
-              : Text("LOGIN", style: kWhiteBold),
+          child: Text("LOGIN", style: kWhiteBold),
         ),
       ],
     );
@@ -124,10 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _forgetPassword(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ForgotPassword()),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPassword()));
       },
       child: Text("Forgot Password?", style: kWhiteBold),
     );
@@ -140,10 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Text("Don't have an account?", style: kWhiteBold),
         TextButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SignUp()),
-            );
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
           },
           child: const Text("Sign Up"),
         ),

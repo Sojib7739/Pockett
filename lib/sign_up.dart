@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:splash_screen2/auth_service.dart';
 import 'package:splash_screen2/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'constants.dart';
 
 class SignUp extends StatefulWidget {
@@ -11,12 +11,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  String _name = "";
-  String _phoneNumber = "";
   String _email = "";
   String _password = "";
-  String _pin = "";
-  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,47 +48,12 @@ class _SignUpState extends State<SignUp> {
       children: [
         TextField(
           decoration: InputDecoration(
-            hintText: "Enter Your Name",
+            hintText: "Email",
             hintStyle: kWhiteBold,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide.none,
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
             fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
             filled: true,
-            prefixIcon: const Icon(Icons.face),
-          ),
-          keyboardType: TextInputType.text,
-          onChanged: (value) => _name = value,
-        ),
-        const SizedBox(height: 10),
-        TextField(
-          decoration: InputDecoration(
-            hintText: "Enter Your Phone Number",
-            hintStyle: kWhiteBold,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide.none,
-            ),
-            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-            filled: true,
-            prefixIcon: const Icon(Icons.phone),
-          ),
-          keyboardType: TextInputType.phone,
-          onChanged: (value) => _phoneNumber = value,
-        ),
-        const SizedBox(height: 10),
-        TextField(
-          decoration: InputDecoration(
-            hintText: "Enter Your Email Address",
-            hintStyle: kWhiteBold,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide.none,
-            ),
-            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-            filled: true,
-            prefixIcon: const Icon(Icons.email_sharp),
+            prefixIcon: const Icon(Icons.email),
           ),
           keyboardType: TextInputType.emailAddress,
           onChanged: (value) => _email = value,
@@ -102,10 +63,7 @@ class _SignUpState extends State<SignUp> {
           decoration: InputDecoration(
             hintText: "Password",
             hintStyle: kWhiteBold,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide.none,
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(18), borderSide: BorderSide.none),
             fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
             filled: true,
             prefixIcon: const Icon(Icons.lock),
@@ -114,55 +72,18 @@ class _SignUpState extends State<SignUp> {
           onChanged: (value) => _password = value,
         ),
         const SizedBox(height: 10),
-        TextField(
-          decoration: InputDecoration(
-            hintText: "PIN",
-            hintStyle: kWhiteBold,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide.none,
-            ),
-            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-            filled: true,
-            prefixIcon: const Icon(Icons.lock),
-          ),
-          obscureText: true,
-          keyboardType: TextInputType.number,
-          onChanged: (value) => _pin = value,
-        ),
-        const SizedBox(height: 10),
         ElevatedButton(
-          onPressed: _isLoading
-              ? null
-              : () async {
-            if (_name.isEmpty ||
-                _email.isEmpty ||
-                _password.isEmpty ||
-                _phoneNumber.isEmpty ||
-                _pin.isEmpty) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                    content: Text("Please fill in all fields")),
-              );
-              return;
-            }
-            setState(() => _isLoading = true);
+          onPressed: () async {
             try {
-              await authService.value.createAccount(
-                email: _email,
-                password: _password,
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                email: _email.trim(),
+                password: _password.trim(),
               );
-              await authService.value.updateUsername(username: _name);
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => LoginScreen()),
-              );
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => LoginScreen()));
             } catch (e) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(e.toString())),
+                SnackBar(content: Text("Sign up failed: ${e.toString()}")),
               );
-            } finally {
-              setState(() => _isLoading = false);
             }
           },
           style: ElevatedButton.styleFrom(
@@ -170,9 +91,7 @@ class _SignUpState extends State<SignUp> {
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
-          child: _isLoading
-              ? const CircularProgressIndicator(color: Colors.white)
-              : Text("Sign Up", style: kWhiteBold),
+          child: Text("Sign Up", style: kWhiteBold),
         ),
       ],
     );
