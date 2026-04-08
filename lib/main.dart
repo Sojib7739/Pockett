@@ -4,6 +4,7 @@ import 'package:splash_screen2/pincode.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +14,8 @@ Future<void> main() async {
   print("✅ Firebase initialized successfully!");  // add this
   runApp(const MyApp());
 }
+
+
 
 
 class MyApp extends StatefulWidget {
@@ -31,7 +34,7 @@ class _MyAppState extends State<MyApp> {
     width = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: HomePage(),
       /*
       title: 'Flutter Demo',
       theme: ThemeData(
