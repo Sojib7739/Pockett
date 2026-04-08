@@ -11,7 +11,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  print("✅ Firebase initialized successfully!");  // add this
+  print("Firebase initialized successfully!");
   runApp(const MyApp());
 }
 
