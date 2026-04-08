@@ -7,3 +7,4 @@ String userPin = "1111";
 String userPassword = "123456";
 
 double balance = 12500.50;
+double money = 12500.50;
