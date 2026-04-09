@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:splash_screen2/login_screen.dart';
 import 'package:splash_screen2/payment.dart';
-import 'package:splash_screen2/reminder.dart';
+import 'package:splash_screen2/reminder1.dart';
+import 'package:splash_screen2/reminder2.dart';
 import 'package:splash_screen2/send_money.dart';
 import 'package:splash_screen2/transaction_history.dart';
 import 'account_settings.dart';
@@ -23,6 +24,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   double balance = 12500.50;
+  // ADD THESE:
+  List<ReminderModel> reminders = [];
+  List<ReminderModel> reminderNotifications = [];
+
+  void addReminder(ReminderModel r) {
+    setState(() { reminders.add(r); });
+  }
+
+  void addReminderNotification(ReminderModel r) {
+    setState(() { reminderNotifications.add(r); });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,26 +111,29 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               title: Text('Notifications', style: kDarkPurpleBold),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NotificationScreen(),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NotificationScreen(
+                    notifications: reminderNotifications,
                   ),
-                );
-              },
+                ),
+              ),
             ),
-
             ListTile(
               title: Text('Reminder', style: kDarkPurpleBold),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context)=> Reminder(),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Reminder1(
+                    reminders: reminders,
+                    notifications: reminderNotifications,
+                    onAddReminder: addReminder,
+                    onAddNotification: addReminderNotification,
                   ),
-                );
-              },
+                ),
+              ),
             ),
-
             Spacer(),
             ListTile(
               title: Text('Logout', style: kDarkPurpleBold),
@@ -156,19 +171,28 @@ class _HomePageState extends State<HomePage> {
                 Builder(
                   builder: (context) => IconButton(
                     icon: const Icon(Icons.menu, size: 25, color: Colors.white),
-                    onPressed: () {
-                      Scaffold.of(context).openDrawer();
-                    },
+                    onPressed: () => Scaffold.of(context).openDrawer(),
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.receipt_long, size: 25, color: Colors.white),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TransactionHistory()),
-                    );
-                  },
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.notifications, size: 25, color: Colors.white),
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NotificationScreen(
+                            notifications: reminderNotifications,
+                          ),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.receipt_long, size: 25, color: Colors.white),
+                      onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => TransactionHistory())),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -315,28 +339,23 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context)=> Reminder(),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Reminder1(
+                    reminders: reminders,
+                    notifications: reminderNotifications,
+                    onAddReminder: addReminder,
+                    onAddNotification: addReminderNotification,
                   ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: klinearGradientStart,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              icon: const Icon(
-                Icons.notification_add,
-                size: 50,
-                color: Colors.white,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: klinearGradientStart,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
-              label: Text(
-                'Reminder',
-                style: kWhiteBold.copyWith(color: Colors.white),
-              ),
+              icon: const Icon(Icons.notification_add, size: 50, color: Colors.white),
+              label: Text('Reminder', style: kWhiteBold.copyWith(color: Colors.white)),
             ),
           ],
         ),
